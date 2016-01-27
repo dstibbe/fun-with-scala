@@ -1,3 +1,5 @@
+package nl.dstibbe.explortation.server
+
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
 import akka.http.scaladsl.Http
@@ -10,7 +12,7 @@ import akka.http.scaladsl.model._
 
 
 
-object AkkaHttpMicroservice extends App {
+object SimpleWebServer extends App {
 
 	implicit val system = ActorSystem()
 	implicit val materializer = ActorMaterializer()
