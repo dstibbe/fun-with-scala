@@ -1,6 +1,9 @@
 name         := "simple-http-server"
+
 organization := "nl.dstibbe.explortation"
+
 version      := "1.0"
+
 scalaVersion := "2.11.7"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")

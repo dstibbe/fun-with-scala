@@ -41,10 +41,14 @@ object SimpleWebServer extends App {
 			case Uri.Path("/") => 
 				HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`,
 				"<html><body>" + (new File(rootLocation).listFiles() mkString "\n<br/>") + "</body></html>"))				
-				
-			case Uri.Path(path:String) =>
-				HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`,
-				"<html><body>Requested file: " + rootLocation + path + "</body></html>"))
+			
+                        case Uri.Path(path:String) => 
+                                val location = new File(rootLocation,path)
+                                if( location.exists()){
+                                  HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`, location))				
+                                }else{
+                                  HttpResponse(404, entity = "Unknown resource!")
+                                }
 			case _ =>
 				HttpResponse(404, entity = "Unknown resource!")
 		}
