@@ -1,47 +1,28 @@
 package nl.dstibbe.explortation.implicits
 
-class MyThing(msg: String) {
-  override def toString(): String = msg
-}
+import ImplicitUser._
 
-class ImplicitUser {
-  def useArgument(myArg: MyThing) = {
-    println("My thing was provided as an argument: " + myArg)
-  }
+object ImplicitFun extends App{
 
-  def useImplicit(implicit myInjectedThing: MyThing) = {
-    println("My thing was injected as myInjectedThing and says: " + myInjectedThing)
-  }
-
-  def useImplicitWithZeroArguments()(implicit myInjectedThing: MyThing) = {
-    println("My thing was injected in a method with zero arguments and says: " + myInjectedThing)
-  }
-  
-   def useImplicitWithArguments(regularArgument:String)(implicit myInjectedThing: MyThing) = {
-    println("My thing was injected in a method with argument [" +
-            regularArgument + "] and says: " + myInjectedThing)
-  }
-}
-
-object ImplicitFun {
-
-  /**
-   * @param args the command line arguments
-   */
-  def main(args: Array[String]): Unit = {
     val myThing = new MyThing("Normal thing")
     implicit val myImplicitThing = new MyThing("Implicit thing")
 
     val myUser = new ImplicitUser()
+    
+    println("==[ Usng Implicit instances ]==")
     myUser.useArgument(myThing)
     myUser.useImplicit
     myUser.useImplicitWithZeroArguments()
     myUser.useImplicitWithArguments("my argument")
     
-    println("Can also provide the implicit argument explicitly")
+    println("==[ Provide the implicit instant as an explicit argument ]==")
     myUser.useImplicit(myImplicitThing)
     myUser.useImplicitWithZeroArguments()(myImplicitThing)
     myUser.useImplicitWithArguments("my argument")(myImplicitThing)
-  }
+   
+    
+    println("==[ Using implicit methods ]==")
+    //String will be converted to MyThing
+    myUser.useImplicit("this is a regular String")    
 
 }
