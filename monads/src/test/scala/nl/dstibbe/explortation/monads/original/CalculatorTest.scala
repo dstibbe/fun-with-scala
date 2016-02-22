@@ -1,5 +1,6 @@
-import nl.dstibbe.explortation.monads.original.Calculators._
-import nl.dstibbe.explortation.monads.original.{Just, Maybe}
+package nl.dstibbe.explortation.monads.original
+
+import Calculators._
 import org.specs2.mutable
 
 /**
@@ -26,6 +27,5 @@ class CalculatorTest extends mutable.Specification {
         }
       } must beEqualTo( Just(2000))
     }
-
   }
 }
